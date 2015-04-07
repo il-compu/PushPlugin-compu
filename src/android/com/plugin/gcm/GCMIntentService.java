@@ -71,6 +71,9 @@ public class GCMIntentService extends GCMBaseIntentService {
 			else {
 				extras.putBoolean("foreground", false);
 
++				// COMPU: if !foreground, call javascript anyway
++				PushPlugin.sendExtras(extras);
++
                 // Send a notification if there is a message
                 if (extras.getString("message") != null && extras.getString("message").length() != 0) {
                     createNotification(context, extras);
