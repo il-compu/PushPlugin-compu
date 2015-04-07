@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:amazon="http://schemas.android.com/apk/lib/com.amazon.device.ads"
     xmlns:rim="http://www.blackberry.com/ns/widgets"
-    id="com.phonegap.plugins.PushPlugin"
+    id="mt.com.compu.phonegap.plugins.PushPlugin"
     version="2.4.0">
 
   <name>PushPlugin</name>
@@ -15,6 +15,8 @@
     iOS uses Apple APNS Notifications.
     WP8 uses Microsoft MPNS Notifications.
     Windows8 uses Microsoft WNS Notifications.
+    
+    Minor modification to still call Javascript code if application is not in foreground.
 	</description>
 
 	<license>MIT</license>
