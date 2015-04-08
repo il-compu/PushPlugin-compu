@@ -32,6 +32,8 @@
 	<!-- android -->
 	<platform name="android">
 
+		<preference name="deliveryReceiptURL" />
+
 		<config-file target="res/xml/config.xml" parent="/*">
 			<feature name="PushPlugin" >
 				<param name="android-package" value="com.plugin.gcm.PushPlugin"/>
