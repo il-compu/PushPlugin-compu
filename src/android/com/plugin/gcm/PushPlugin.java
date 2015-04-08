@@ -26,6 +26,8 @@ public class PushPlugin extends CordovaPlugin {
 	public static final String UNREGISTER = "unregister";
 	public static final String EXIT = "exit";
 
+	private static String gDeliveryReceiptURL = "not-init";
+
 	private static CordovaWebView gWebView;
 	private static String gECB;
 	private static String gSenderID;
@@ -125,7 +127,8 @@ public class PushPlugin extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         gForeground = true;
-    }
+	gDeliveryReceiptURL = preferences.getString("mt.com.compu.PushPlugin.deliveryReceiptURL", "default-init");
+}
 
 	@Override
     public void onPause(boolean multitasking) {
