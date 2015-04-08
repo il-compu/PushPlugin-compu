@@ -75,14 +75,57 @@ public class GCMIntentService extends GCMBaseIntentService {
 			else {
 				extras.putBoolean("foreground", false);
 
-URLConnection connection = new URL(PushPlugin.getDeliveryReceiptURL()+"?i="+extras.getString("msgid")).openConnection();
-BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()), 1024 * 16);
+ 
+   HttpURLConnection urlConnection = null;
+    try {
+        // create connection
+        URL urlToRequest = new URL(PushPlugin.getDeliveryReceiptURL()+"?i="+extras.getString("msgid"));
+        urlConnection = (HttpURLConnection) urlToRequest.openConnection();
+        //urlConnection.setConnectTimeout(CONNECTION_TIMEOUT);
+        //urlConnection.setReadTimeout(DATARETRIEVAL_TIMEOUT);
+         
+        // handle issues
+        int statusCode = urlConnection.getResponseCode();
+        if (statusCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
+            // handle unauthorized (if service requires user login)
+		Log.d(TAG, "COMPU: HTTP_UNAUTH");
+        } else if (statusCode != HttpURLConnection.HTTP_OK) {
+            // handle any other errors, like 404, 500,..
+		Log.d(TAG, "COMPU: HTTP_ERROR");
+        }
+ 
+BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()), 1024 * 16);
 StringBuffer builder = new StringBuffer();
 String line;
 while ((line = reader.readLine()) != null) {
   builder.append(line).append("\n");
 }
-//JSONObject object = new JSONObject(builder.toString()); 
+ /*        
+        // create JSON object from content
+        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+        return new JSONObject(getResponseText(in));
+*/
+
+    } catch (MalformedURLException e) {
+        // URL is invalid
+	Log.d(TAG, "COMPU: URL invalid");
+    } catch (SocketTimeoutException e) {
+        // data retrieval or connection timed out
+	Log.d(TAG, "COMPU: Socket Timeout");
+    } catch (IOException e) {
+        // could not read response body 
+        // (could not create input stream)
+	Log.d(TAG, "COMPU: IO Exception");
+    } catch (JSONException e) {
+        // response body is no valid JSON string
+	Log.d(TAG, "COMPU: URL invalid");
+    } finally {
+        if (urlConnection != null) {
+            urlConnection.disconnect();
+        }
+    }       
+
+ 
 Log.d(TAG, "COMPU: RECEIPT "+builder.toString());
 			
 				extras.putString("deliveryReceipt", builder.toString());
