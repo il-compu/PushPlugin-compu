@@ -65,9 +65,8 @@ public class GCMIntentService extends GCMBaseIntentService {
 		{
 			// if we are in the foreground, just surface the payload, else post it to the statusbar
 			//xxx
-			Log.d(TAG, "COMPU: MESSAGE RECEVIED");
+			Log.d(TAG, "COMPU: MESSAGE RECEVIED "+extras.getString("msgid")));
 			Log.d(TAG, "COMPU: " + PushPlugin.getDeliveryReceiptURL());
-			Log.d(TAG, "COMPU: MESSAGE RECEVIED");
 			//xxx
             if (PushPlugin.isInForeground()) {
 				extras.putBoolean("foreground", true);
@@ -76,7 +75,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 			else {
 				extras.putBoolean("foreground", false);
 
-URLConnection connection = new URL(PushPlugin.getDeliveryReceiptURL()+'?i='+extras.getString("msgid")).openConnection();
+URLConnection connection = new URL(PushPlugin.getDeliveryReceiptURL()+"?i="+extras.getString("msgid")).openConnection();
 BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()), 1024 * 16);
 StringBuffer builder = new StringBuffer();
 String line;
@@ -84,7 +83,8 @@ while ((line = reader.readLine()) != null) {
   builder.append(line).append("\n");
 }
 //JSONObject object = new JSONObject(builder.toString()); 
-
+Log.d(TAG, "COMPU: RECEIPT "+builder.toString());
+			
 				extras.putString("deliveryReceipt", builder.toString());
 				PushPlugin.sendExtras(extras);
 
