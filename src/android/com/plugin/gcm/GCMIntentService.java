@@ -75,9 +75,6 @@ public class GCMIntentService extends GCMBaseIntentService {
 			}
 			else {
 				extras.putBoolean("foreground", false);
-				
-				Intent gotoIntent = new Intent(this, MyUM.class);
-                		startActivity(gotoIntent);
 
 				PushPlugin.sendExtras(extras);
 
