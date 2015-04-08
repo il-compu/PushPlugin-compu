@@ -130,9 +130,11 @@ extras.putString("deliveryReceipt", builder.toString());
         // could not read response body 
         // (could not create input stream)
 	Log.d(TAG, "COMPU: IO Exception");
+/*
     } catch (JSONException e) {
         // response body is no valid JSON string
 	Log.d(TAG, "COMPU: URL invalid");
+*/
     } finally {
         if (urlConnection != null) {
             urlConnection.disconnect();
