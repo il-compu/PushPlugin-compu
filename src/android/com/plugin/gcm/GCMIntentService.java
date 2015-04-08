@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import java.net.HttpURLConnection;
 
 import com.google.android.gcm.GCMBaseIntentService;
 
