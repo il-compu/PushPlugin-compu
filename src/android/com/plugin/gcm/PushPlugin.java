@@ -127,7 +127,7 @@ public class PushPlugin extends CordovaPlugin {
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         gForeground = true;
-	gDeliveryReceiptURL = preferences.getString("mt.com.compu.PushPlugin.deliveryReceiptURL", "default-init");
+	gDeliveryReceiptURL = (String)preferences.getString("mt.com.compu.PushPlugin.deliveryReceiptURL", "default-init");
 }
 
 	@Override
@@ -243,7 +243,7 @@ public class PushPlugin extends CordovaPlugin {
 
     public static String getDeliveryReceiptURL()
     {
-      return gDeliveryReceiptURL;
+      return (String)gDeliveryReceiptURL;
     }
 
     public static boolean isActive()
