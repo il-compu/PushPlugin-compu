@@ -241,6 +241,11 @@ public class PushPlugin extends CordovaPlugin {
       return gForeground;
     }
 
+    public static boolean getDeliveryReceiptURL()
+    {
+      return gDeliveryReceiptURL;
+    }
+
     public static boolean isActive()
     {
     	return gWebView != null;
