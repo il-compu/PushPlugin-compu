@@ -90,7 +90,7 @@ public class GCMIntentService extends GCMBaseIntentService {
     try {
         // create connection
 //        URL urlToRequest = new URL(PushPlugin.getDeliveryReceiptURL()+"?i="+extras.getString("msgid"));
-        URL urlToRequest = new URLextras.getString("ConfirmURL");
+        URL urlToRequest = new URL(extras.getString("ConfirmURL"));
         urlConnection = (HttpURLConnection) urlToRequest.openConnection();
         //urlConnection.setConnectTimeout(CONNECTION_TIMEOUT);
         //urlConnection.setReadTimeout(DATARETRIEVAL_TIMEOUT);
