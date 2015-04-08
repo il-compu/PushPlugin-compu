@@ -4,7 +4,7 @@
     xmlns:amazon="http://schemas.android.com/apk/lib/com.amazon.device.ads"
     xmlns:rim="http://www.blackberry.com/ns/widgets"
     id="mt.com.compu.phonegap.plugins.PushPlugin"
-    version="2.4.18">
+    version="2.4.19">
 
   <name>PushPlugin-compu</name>
 	<author>Bob Easterday</author>
