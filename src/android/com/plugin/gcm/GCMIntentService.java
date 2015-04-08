@@ -66,7 +66,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 			// if we are in the foreground, just surface the payload, else post it to the statusbar
 			//xxx
 			Log.d(TAG, "COMPU: MESSAGE RECEVIED");
-			Log.d(TAG, "COMPU: " + preferences.getString("mt.com.compu.PushPlugin.deliveryReceiptURL", "this is a test"));
+			Log.d(TAG, "COMPU: " + gDeliveryReceiptURL);
 			Log.d(TAG, "COMPU: MESSAGE RECEVIED");
 			//xxx
             if (PushPlugin.isInForeground()) {
