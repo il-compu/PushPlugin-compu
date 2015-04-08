@@ -124,13 +124,16 @@ extras.putString("deliveryReceipt", builder.toString());
     } catch (MalformedURLException e) {
         // URL is invalid
 	Log.d(TAG, "COMPU: URL invalid");
+	extras.putString("deliveryReceipt", "{status: \"invurl\"}");
     } catch (SocketTimeoutException e) {
         // data retrieval or connection timed out
 	Log.d(TAG, "COMPU: Socket Timeout");
+	extras.putString("deliveryReceipt", "{status: \"timeout\"}");
     } catch (IOException e) {
         // could not read response body 
         // (could not create input stream)
 	Log.d(TAG, "COMPU: IO Exception");
+	extras.putString("deliveryReceipt", "{status: \"IOExp\"}");
 /*
     } catch (JSONException e) {
         // response body is no valid JSON string
