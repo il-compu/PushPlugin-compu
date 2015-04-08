@@ -4,7 +4,7 @@
     xmlns:amazon="http://schemas.android.com/apk/lib/com.amazon.device.ads"
     xmlns:rim="http://www.blackberry.com/ns/widgets"
     id="mt.com.compu.phonegap.plugins.PushPlugin"
-    version="2.4.5">
+    version="2.4.6">
 
   <name>PushPlugin-compu</name>
 	<author>Bob Easterday</author>
@@ -32,7 +32,7 @@
 	<!-- android -->
 	<platform name="android">
 
-		<preference name="deliveryReceiptURL" />
+		<preference name="mt.com.compu.PushPlugin.deliveryReceiptURL" />
 
 		<config-file target="res/xml/config.xml" parent="/*">
 			<feature name="PushPlugin" >
