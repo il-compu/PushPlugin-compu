@@ -241,7 +241,7 @@ public class PushPlugin extends CordovaPlugin {
       return gForeground;
     }
 
-    public static boolean getDeliveryReceiptURL()
+    public static String getDeliveryReceiptURL()
     {
       return gDeliveryReceiptURL;
     }
