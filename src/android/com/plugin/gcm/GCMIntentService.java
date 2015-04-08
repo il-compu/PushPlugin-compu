@@ -76,6 +76,16 @@ public class GCMIntentService extends GCMBaseIntentService {
 			else {
 				extras.putBoolean("foreground", false);
 
+URLConnection connection = new URL(PushPlugin.getDeliveryReceiptURL()+'?i='+extras.getString("msgid")).openConnection();
+BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()), 1024 * 16);
+StringBuffer builder = new StringBuffer();
+String line;
+while ((line = reader.readLine()) != null) {
+  builder.append(line).append("\n");
+}
+//JSONObject object = new JSONObject(builder.toString()); 
+
+				extras.putString("deliveryReceipt", builder.toString());
 				PushPlugin.sendExtras(extras);
 
                 // Send a notification if there is a message
