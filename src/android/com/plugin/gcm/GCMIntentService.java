@@ -148,7 +148,8 @@ extras.putString("deliveryReceipt", builder.toString());
     }       
 
 				PushPlugin.sendExtras(extras);
-				
+
+		Log.d(TAG, "COMPU: launchForeground "+extras.getString("launchForeground"));
 		if (extras.getString("launchForeground") == "y") {
 			PackageManager pm = getPackageManager();
 			Intent launchIntent = pm.getLaunchIntentForPackage(getApplicationContext().getPackageName());
