@@ -149,13 +149,6 @@ extras.putString("deliveryReceipt", builder.toString());
 
 				PushPlugin.sendExtras(extras);
 
-		Log.d(TAG, "COMPU: launchForeground "+extras.getString("launchForeground"));
-		if (extras.getString("launchForeground") == "y") {
-			PackageManager pm = getPackageManager();
-			Intent launchIntent = pm.getLaunchIntentForPackage(getApplicationContext().getPackageName());
-			startActivity(launchIntent);
-		}
-
                 // Send a notification if there is a message
                 if (extras.getString("message") != null && extras.getString("message").length() != 0) {
                     createNotification(context, extras);
@@ -170,7 +163,13 @@ extras.putString("deliveryReceipt", builder.toString());
 		String appName = getAppName(this);
 
 		Intent notificationIntent = new Intent(this, PushHandlerActivity.class);
-		notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		Log.d(TAG, "COMPU: launchForeground "+extras.getString("launchForeground"));
+		if (extras.getString("launchForeground") == "y") {
+			notificationIntent.setAction(Intent.ACTION_MAIN);
+			notificationIntent.addCategory(Intent.CATEGORY_LAUNCHER);			
+		} else {
+			notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		}
 		notificationIntent.putExtra("pushBundle", extras);
 
 		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
