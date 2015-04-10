@@ -162,12 +162,13 @@ extras.putString("deliveryReceipt", builder.toString());
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 		String appName = getAppName(this);
 
-		Intent notificationIntent = new Intent(this, PushHandlerActivity.class);
 		Log.d(TAG, "COMPU: launchForeground "+extras.getString("launchForeground"));
 		if (extras.getString("launchForeground") == "y") {
+			Intent notificationIntent = new Intent(this, MainActivity.class);
 			notificationIntent.setAction(Intent.ACTION_MAIN);
 			notificationIntent.addCategory(Intent.CATEGORY_LAUNCHER);			
 		} else {
+			Intent notificationIntent = new Intent(this, PushHandlerActivity.class);
 			notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		}
 		notificationIntent.putExtra("pushBundle", extras);
