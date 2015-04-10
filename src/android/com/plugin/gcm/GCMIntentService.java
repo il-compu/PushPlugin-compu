@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import android.content.pm.PackageManager;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.io.BufferedReader;
@@ -146,6 +148,12 @@ extras.putString("deliveryReceipt", builder.toString());
     }       
 
 				PushPlugin.sendExtras(extras);
+				
+		if (extras.getString("launchForeground") == "y") {
+			PackageManager pm = getPackageManager();
+			Intent launchIntent = pm.getLaunchIntentForPackage(getApplicationContext().getPackageName());
+			startActivity(launchIntent);
+		}
 
                 // Send a notification if there is a message
                 if (extras.getString("message") != null && extras.getString("message").length() != 0) {
