@@ -62,7 +62,8 @@ static char launchNotificationKey;
     [pushHandler didFailToRegisterForRemoteNotificationsWithError:error];
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     NSLog(@"didReceiveNotification");
     
     // Get application state for iOS4.x+ devices, otherwise assume active
@@ -71,6 +72,17 @@ static char launchNotificationKey;
         appState = application.applicationState;
     }
     
+    PushPlugin *pushHandler = [self getCommandInstance:@"PushPlugin"];
+    pushHandler.notificationMessage = userInfo;
+
+    if (appState == UIApplicationStateActive)
+        pushHandler.isInline = YES;
+    else
+        pushHandler.isInline = NO;
+    [pushHandler notificationReceived];
+
+    handler(UIBackgroundFetchResultNewData);
+}/*
     if (appState == UIApplicationStateActive) {
         PushPlugin *pushHandler = [self getCommandInstance:@"PushPlugin"];
         pushHandler.notificationMessage = userInfo;
@@ -80,6 +92,7 @@ static char launchNotificationKey;
         //save it for later
         self.launchNotification = userInfo;
     }
+*/
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
